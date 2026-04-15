@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat Lover's Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fffafc;
+      color: #333;
+    }
+    header {
+      background: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+    }
+    nav { /*(AI) using for the content bars*/
+      background: #ffdce3;
+      text-align: center;
+      padding: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .breed {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer; /*(AI) mouse or cliclk model*/
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #ffb6c1;
+    }
+    .dark { /*(AI)*/
+      background: #222;
+      color: white;
+    }
+    .dark section, .dark .breed { /*(AI) */
+      background: #333;
+      color: white;
+      border-color: #555;
+    }
+img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+#quizMessage {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+  </style>
+</head>
+<body>
+<div id="quizOverlay" style="  
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+">
+
+  <img id="bigGif" style="max-width:400px; border-radius:10px;">
+  <p id="bigMessage" style="color:white; font-size:24px; margin-top:15px;"></p>
+  <button onclick="closeOverlay()" style="margin-top:15px;">Close</button>
+</div>
+
+  <header>
+    <h1>🐈‍⬛ Cat Lover's Guide 🐈</h1>
+    <p>Learn about cat breeds, care tips, and fun facts!</p>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </header>
+
+  <nav> <!--(AI) content bar -->
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('breedsPage')">Breeds</a>
+    <a onclick="showPage('carePage')">Care Tips</a>
+    <a onclick="showPage('contactPage')">Contact</a>
+    <a onclick="showPage('quizPage')">Cat Quiz</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome💗</h2>
+<img src="cute.jpg" alt="Cute Cat">
+    <p>Cats are loving, playful, and beautiful pets. This website is for cat lovers who want to learn more.</p>
+    <button onclick="showFact()">Show Cat Fact</button>
+    <p id="fact"></p>
+<img id="factGif" style="display:none; max-width:300px; border-radius:10px;">
+
+  </section>
+
+  <section id="breedsPage" style="display:none;">
+    <h2>Cat Breeds</h2>
+<p> Here is some information about the 5 most popular cat breeds in the world.</p>
+    <div class="breed">
+      <h3>Persian Cat</h3>
+      <button onclick="showBreedInfo('persian')">Learn More</button>
+      <p id="persian"></p>
+<img id="persianImg" style="display:none; max-width:250px;">
+</div>
+    </div>
+    <div class="breed">
+      <h3>Bengal Cat</h3>
+      <button onclick="showBreedInfo('bengal')">Learn More</button>
+      <p id="bengal"></p>
+<img id="bengalImg" style="display:none; max-width:250px;">
+</div>
+    </div>
+    <div class="breed">
+      <h3>Siamese Cat</h3>
+      <button onclick="showBreedInfo('siamese')">Learn More</button>
+      <p id="siamese"></p>
+<img id="siameseImg" style="display:none; max-width:250px;">
+</div>
+    </div>
+    <div class="breed">
+      <h3>Maine Coon</h3>
+      <button onclick="showBreedInfo('mainecoon')">Learn More</button>
+      <p id="mainecoon"></p>
+<img id="mainecoonImg" style="display:none; max-width:250px;">
+</div>
+    </div>
+    <div class="breed">
+      <h3>Sphynx Cat</h3>
+      <button onclick="showBreedInfo('sphynx')">Learn More</button>
+      <p id="sphynx"></p>
+<img id="sphynxImg" style="display:none; max-width:250px;">
+</div>
+   
+  </section>
+
+  <section id="carePage" style="display:none;">
+    <h2>Cat Care Tips</h2>
+    <button onclick="toggleTips()">Show / Hide Tips</button>
+    <ul id="tips" style="display:none;">
+      <li>Give fresh food and water daily</li>
+      <li>Clean the litter box</li>
+      <li>Brush fur regularly</li>
+      <li>Visit the vet for checkups</li>
+    </ul>
+  </section>
+
+  <section id="contactPage" style="display:none;">
+    <h2>Adoption Contact Form</h2>
+    <p>Thinking about adopting a cat? Fill out this form to get in touch with us.</p>
+    <form onsubmit="return validateForm()">  <!--(AI)-->
+      <label>Name:</label><br />
+      <input type="text" id="name" /><br /><br />
+      <label>Email:</label><br />
+      <input type="text" id="email" /><br /><br />
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="quizPage" style="display:none;">
+    <h2>🐾 Cat Quiz</h2>
+    <p>Which cat breed is known for being very fluffy?</p>
+    <select id="quizAnswer">
+      <option value="">Choose one</option>
+      <option value="Persian">Persian</option>
+      <option value="Bengal">Bengal</option>
+      <option value="Siamese">Siamese</option>
+      <option value="MaineCoon">Maine Coon</option>
+      <option value="Sphynx">Sphynx</option>
+    </select>
+
+
+    <p>Which cat breed is known for being hairless?</p>
+    <select id="quizAnswer2">
+      <option value="">Choose one</option>
+      <option value="Persian">Persian</option>
+      <option value="Bengal">Bengal</option>
+      <option value="Siamese">Siamese</option>
+      <option value="MaineCoon">Maine Coon</option>
+      <option value="Sphynx">Sphynx</option>
+    </select>
+<button onclick="checkAllQuiz()">Check All Answers</button>
+<p id="quizResult"></p>
+
+<img id="quizGif" style="display:none; max-width:300px; border-radius:10px;">
+
+<p id="quizMessage"></p>
+  </section>
+
+  <footer>
+    <p>Made by Fatima for Capstone Project 🐾</p>
+  </footer>
+
+  <script>
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+    function showFact() {
+      document.getElementById("fact").innerText = "Cats sleep 12 to 16 hours every day!";
+let gif = document.getElementById("factGif");
+gif.src="sleepy.gif";
+gif.style.display="block";
+    }
+
+    function showBreedInfo(breed) {
+      if (breed === "persian") {
+        document.getElementById("persian").innerText = "Persian cats are fluffy, calm, and friendly.";
+let img = document.getElementById("persianImg");
+    img.src = "persian.jpg";
+    img.style.display = "block";
+      } else if (breed === "bengal") {
+        document.getElementById("bengal").innerText = "Bengal cats are active, smart, and playful.";
+ let img = document.getElementById("bengalImg");
+    img.src = "bengal.jpg";
+    img.style.display = "block";
+      } else if (breed === "siamese") {
+        document.getElementById("siamese").innerText = "Siamese cats are vocal, social, and affectionate.";
+ let img = document.getElementById("siameseImg");
+    img.src = "siamese.jpg";
+    img.style.display = "block";
+      } else if (breed === "mainecoon") {
+        document.getElementById("mainecoon").innerText = "Maine Coons are large, gentle, and good with families.";
+let img = document.getElementById("mainecoonImg");
+    img.src = "mainecoon.jpg";
+    img.style.display = "block";
+      } else if (breed === "sphynx") {
+        document.getElementById("sphynx").innerText = "Sphynx cats are hairless, curious, and energetic.";
+let img = document.getElementById("sphynxImg");
+    img.src = "sphynx.jpg";
+    img.style.display = "block";
+      }
+    }
+
+    function toggleTips() {
+      let tips = document.getElementById("tips");
+      tips.style.display = tips.style.display === "none" ? "block" : "none";
+    }
+
+    function validateForm() {
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      if (name === "" || email === "") {
+        alert("Please fill in all fields.");
+        return false;
+      }
+      alert("Form submitted successfully!");
+      return true;
+    }
+
+    function showPage(pageId) {
+      let sections = document.querySelectorAll('section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+    }
+
+  function checkAllQuiz(){ 
+  let answer1 = document.getElementById("quizAnswer").value;
+  let answer2 = document.getElementById("quizAnswer2").value;
+
+  let overlay = document.getElementById("quizOverlay");
+  let gif = document.getElementById("bigGif");
+  let message = document.getElementById("bigMessage");
+
+  if (answer1 === "" || answer2 === "") {
+    alert("⚠️ Please answer both questions!");
+    return;
+  }
+
+  // Show overlay
+  overlay.style.display = "flex";
+
+  if (answer1 === "Persian" && answer2 === "Sphynx") {
+    gif.src = "happy.gif";
+    message.innerText = "Yayyyyy you areeee correctttt 😄🐾";
+  } else {
+    gif.src = "sad.gif";
+    message.innerText = "Tryyyy Agaiinnnn 😿";
+  }
+}    
+function closeOverlay() {
+  document.getElementById("quizOverlay").style.display = "none";
+}
+  </script>
+</body>
+</html>
